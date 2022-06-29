@@ -1,41 +1,52 @@
 function computerPlay() {
-    let randomNumber = Math.floor(Math.random() * 3);
+    let randomNumber = Math.floor(Math.random() * 3); // generates random number 0-2
     
+    // assigning random number to string value rock/paper/scissors
     switch (randomNumber) {
         case 0: 
-            return "Rock"
+            return "ROCK"
         case 1:
-            return "Paper"
+            return "PAPER"
         case 2: 
-            return "Scissors"
+            return "SCISSORS"
     }
 }
 
-console.log(computerPlay());
-
 function playRound(playerSelection, computerSelection) {
-    if (playerSelection === computerSelection) {
-        console.log("You tied.");
+    if (playerSelection.toUpperCase() === computerSelection) {
         return "You tied."
     }
     if ( //Player Wins Logic
-        (playerSelection === "Rock" && computerSelection === "Scissors") ||
-        (playerSelection === "Scissors" && computerSelection === "Paper") ||
-        (playerSelection === "Paper" && computerSelection === "Rock")
+        (playerSelection.toUpperCase() === "ROCK" && computerSelection === "SCISSORS") ||
+        (playerSelection.toUpperCase() === "SCISSORS" && computerSelection === "PAPER") ||
+        (playerSelection.toUpperCase() === "PAPER" && computerSelection === "ROCK")
     ) {
-        console.log(`You win! ${playerSelection} beats ${computerSelection}!`);
+
         return `You win! ${playerSelection} beats ${computerSelection}!`
     }
     if ( //Computer Wins Logic
-        (computerSelection === "Rock" && playerSelection === "Scissors") ||
-        (computerSelection === "Scissors" && playerSelection === "Paper") ||
-        (computerSelection === "Paper" && playerSelection === "Rock")
+        (computerSelection === "ROCK" && playerSelection.toUpperCase() === "SCISSORS") ||
+        (computerSelection === "SCISSORS" && playerSelection.toUpperCase() === "PAPER") ||
+        (computerSelection === "PAPER" && playerSelection.toUpperCase() === "ROCK")
     ) {
-        console.log(`You lose! ${computerSelection} beats ${playerSelection}`);
         return `You lose! ${computerSelection} beats ${playerSelection}`;
     }
 }
 
-const playerSelection = "Paper";
-const computerSelection = computerPlay();
-console.log(playRound(playerSelection, computerSelection));
+function game() {
+    for (let i = 0; i < 5; i++) { // for loop to create 5 round game
+
+        // prompt user to pick rock/paper/scissors
+        let playerSelection = prompt("Rock, Paper, or Scissors?").toUpperCase();
+        
+        // assign computerPlay() to local variable
+        const computerSelection = computerPlay();
+
+        // call playRound() and assign to local variable
+        const currentRound = playRound(playerSelection, computerSelection);
+
+        console.log(currentRound);
+    }
+}
+
+game();
